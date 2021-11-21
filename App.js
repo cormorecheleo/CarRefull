@@ -1,24 +1,11 @@
 import * as React from 'react';
-import { Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import HomeScreen from "./Screen/HomeScreen";
+import SettingsScreen from "./Screen/SettingScreen";
+import CarScreen from "./Screen/CarScreen";
 
-function HomeScreen() {
-    return (
-        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-            <Text>Home!</Text>
-        </View>
-    );
-}
-
-function SettingsScreen() {
-    return (
-        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-            <Text>Settings!</Text>
-        </View>
-    );
-}
 
 const Tab = createBottomTabNavigator();
 
@@ -32,6 +19,15 @@ export default function App() {
                     options={{
                         tabBarIcon: ({color}) => (
                             <MaterialCommunityIcons name="home" color={color} size={26}/>
+                        )
+                    }}
+                />
+                <Tab.Screen
+                    name="Car"
+                    component={CarScreen}
+                    options={{
+                        tabBarIcon: ({color}) => (
+                            <MaterialCommunityIcons name="car" color={color} size={26}/>
                         )
                     }}
                 />
