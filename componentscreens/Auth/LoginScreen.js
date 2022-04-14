@@ -1,15 +1,23 @@
 import React, { useState } from "react";
-import {StatusBar, Text, TextInput, TouchableOpacity, View, StyleSheet} from "react-native";
+import {StatusBar, Text, TextInput, TouchableOpacity, View, Image} from "react-native";
 import {KeyboardAwareScrollView} from "react-native-keyboard-aware-scroll-view";
-import {firebase} from "../firebase/config";
+import {firebase} from "../../firebase/config";
+import styles from "./AuthStyle";
+import {LinearGradient} from "expo-linear-gradient";
+import GasStation from "../../assets/gas-station.png";
 
 export default function LoginScreen({navigation}) {
+
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
     const onFooterLinkPress = () => {
         navigation.navigate('Register')
+    }
+
+    const onTestPress = () => {
+        navigation.navigate('Home')
     }
 
     const onLoginPress = () => {
@@ -45,6 +53,9 @@ export default function LoginScreen({navigation}) {
             <KeyboardAwareScrollView
             style={{ flex:1, width: '100%'}}
             keyboardShoulPersistTaps="always">
+                <View style={styles.logoView}>
+                    <Image style={styles.logo} source={GasStation}/>
+                </View>
             <TextInput
                 style={styles.input}
                 placeholder="E-mail"
@@ -59,9 +70,10 @@ export default function LoginScreen({navigation}) {
                     value={password}
                     autoCapitalize="none"/>
                 <TouchableOpacity
-                    style={styles.button}
                     onPress={()=> onLoginPress()}>
+                    <LinearGradient colors={["rgba(0,120,255,1)", "black"]} style={styles.button} end={{x:1.1, y:0.5}}>
                     <Text style={styles.buttonTitle}>Log in</Text>
+                    </LinearGradient>
                 </TouchableOpacity>
                 <View style={styles.footerView}>
                     <Text style={styles.footerText}>Don't have an account ? <Text onPress={onFooterLinkPress} style={styles.footerLink}>Sign up</Text> </Text>
@@ -70,61 +82,3 @@ export default function LoginScreen({navigation}) {
         </View>
     );
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex:1,
-        alignItems: 'center'
-    },
-    title: {
-
-    },
-    logo: {
-        flex:1,
-        height: 120,
-        width: 90,
-        alignSelf:'center',
-        margin: 30
-    },
-    input: {
-        height: 40,
-        borderRadius: 5,
-        overflow: 'hidden',
-        backgroundColor: 'white',
-        marginTop: 10,
-        marginBottom: 10,
-        marginLeft: 30,
-        marginRight: 30,
-        paddingLeft: 16
-    },
-    button: {
-        backgroundColor: '#788eec',
-        marginRight: 30,
-        marginLeft: 30,
-        marginTop: 20,
-        height: 48,
-        borderRadius: 5,
-        alignItems: 'center',
-        justifyContent: 'center'
-    },
-    buttonTitle: {
-        color: "black",
-        fontSize: 16,
-        fontWeight: "bold"
-    },
-    footerView: {
-        flex:1,
-        alignItems: 'center',
-        marginTop: 20
-    },
-    footerText: {
-        fontSize: 16,
-        color: '#2e2e2d'
-    },
-    footerLink: {
-        color: '#788eec',
-        fontSize:16,
-        fontWeight: "bold"
-    }
-
-});

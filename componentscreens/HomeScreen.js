@@ -2,11 +2,14 @@ import React from "react";
 import { Text, View, StyleSheet, Button } from "react-native";
 import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import CarScreen from './Car/CarScreen';
+import SettingsScreen from './Settings/SettingsScreen';
+import InfoScreen from "./Info/InfoScreen";
 
 
-export default function HomeScreen({route}){
-    const user = route.params
-    const Tab= createBottomTabNavigator()
+export default function HomeScreen({route, navigation}){
+    const user = route.params;
+    const Tab= createBottomTabNavigator();
     return(
         <Tab.Navigator>
             <Tab.Screen name="Home" component={Home} options={{
@@ -14,14 +17,17 @@ export default function HomeScreen({route}){
                     <MaterialCommunityIcons name="home" color={color} size={26} />
                 )
             }}/>
-            <Tab.Screen name="Car" component={Car} options={{
+            <Tab.Screen name="Car" component={CarScreen} options={{
                 tabBarIcon: ({ color }) => (
                     <MaterialCommunityIcons name="car" color={color} size={26} />
                 )
             }}/>
-            <Tab.Screen name="Settings" component={Settings} options={{
+            <Tab.Screen name="Info" component={InfoScreen} options={{tabBarIcon: ({ color }) => (
+                    <MaterialCommunityIcons name="information-variant" color={color} size={26} />
+                )}}/>
+            <Tab.Screen name="Account" component={SettingsScreen} options={{
                 tabBarIcon: ({ color }) => (
-                    <MaterialCommunityIcons name="cog-outline" color={color} size={26} />
+                    <MaterialCommunityIcons name="account" color={color} size={26} />
                 )
             }}/>
         </Tab.Navigator>
@@ -31,24 +37,7 @@ export default function HomeScreen({route}){
 function Home(){
     return(
         <View>
-            <Text>Home !</Text>
-        </View>
-    )
-}
-
-function Car({navigation}) {
-    return(
-        <View>
-            <Text>Car !</Text>
-            <Button title="Ajouter vehicule" onPress={() => navigation.navigate('Ajouter véhicule')}/>
-        </View>
-    )
-}
-
-function Settings() {
-    return(
-        <View>
-            <Text>Settings !</Text>
+            <Text>Home ! </Text>
         </View>
     )
 }
